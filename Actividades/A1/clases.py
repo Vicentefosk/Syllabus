@@ -1,12 +1,20 @@
-class Animal:
+from abc import ABC, abstractmethod
+
+
+
+class Animal(ABC):
+
     def __init__(self,peso,nombre,energia,identificador):
         self.peso = peso
         self.nombre=nombre
         self.__energia=100
         self.identificador=identificador
     
+    @abstractmethod
     def desplazarse(self):
+        pass
     
+    @property
     def energia(self,energia):
         if self.energia >= 0:
             return self.energia
@@ -16,9 +24,8 @@ class Animal:
 
 
 class Terrestre(Animal):
-    def __init__(self,peso,nombre,energia,identificador):
-
-    def __init__(self,cantidad_patas,*args,**kwargs):
+    def __init__(self,peso,nombre,energia,identificador,*args,**kwargs):
+        super().__init__(peso,nombre,energia,identificador)
         self.cantidad_patas=cantidad_patas
 
     def energia_gastada_por_desplazamiento(self):
@@ -34,6 +41,7 @@ class Terrestre(Animal):
 
 class Acuatico(Animal):
     def __init__(self,peso,nombre,energia,identificador):
+        super().__init__(peso,nombre,energia,identificador)
 
     def energia_gastada_por_desplazamiento(self):
         peso=self.peso
@@ -46,6 +54,7 @@ class Acuatico(Animal):
 
 class Perro(Terrestre):
     def __init__(self,cantidad_patas,*args,**kwargs):
+        super().__init__()
 
     def __init__(self,raza,*args,**kwargs):
         self.raza=raza
