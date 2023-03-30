@@ -1,20 +1,77 @@
 class Animal:
-    pass
+    def __init__(self,peso,nombre,energia,identificador):
+        self.peso = peso
+        self.nombre=nombre
+        self.__energia=100
+        self.identificador=identificador
+    
+    def desplazarse(self):
+    
+    def energia(self,energia):
+        if self.energia >= 0:
+            return self.energia
+        
+        else:
+            return None
 
-class Terrestre:
-    pass
 
-class Acuatico:
-    pass
+class Terrestre(Animal):
+    def __init__(self,peso,nombre,energia,identificador):
 
-class Perro:
-    pass
+    def __init__(self,cantidad_patas,*args,**kwargs):
+        self.cantidad_patas=cantidad_patas
 
-class Pez:
-    pass
+    def energia_gastada_por_desplazamiento(self):
+        peso = self.peso
+        energia_requerida = (peso*5)
+        return energia_requerida
+    
+    def desplazarse(self):
+        caminar=print("caminando...")
+        self.energia -= Terrestre.energia_gastada_por_desplazamiento
+        return caminar
 
-class Ornitorrinco:
-    pass
+
+class Acuatico(Animal):
+    def __init__(self,peso,nombre,energia,identificador):
+
+    def energia_gastada_por_desplazamiento(self):
+        peso=self.peso
+        energia_requerida= (peso*2)
+        return energia_requerida
+    def desplazarse(self):
+        nadar = print("nadando...")
+        self.energia -= Acuatico.energia_gastada_por_desplazamiento
+        return nadar
+
+class Perro(Terrestre):
+    def __init__(self,cantidad_patas,*args,**kwargs):
+
+    def __init__(self,raza,*args,**kwargs):
+        self.raza=raza
+    
+    def ladrar(self):
+        guau=print("guau guau")
+        return guau
+
+class Pez(Acuatico):
+    def __init__(self,peso,nombre,energia,identificador):
+
+    def __init__(self,color,*args,**kwargs):
+        self.color=color
+
+    def nadar(self):
+        nadar=print("moviendo aleta")
+        return nadar
+    
+
+class Ornitorrinco(Terrestre,Acuatico):
+    def __init__(self,peso,nombre,energia,identificador,*args,**kwargs,cantidad_patas):
+
+    def desplazarse(self):
+        peso=self.peso
+        energia_requerida = ((peso*2)+(peso*5))//2
+        return energia_requerida
 
 
 if __name__ == '__main__':
