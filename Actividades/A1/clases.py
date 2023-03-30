@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from secrets import choice
 
 
 
@@ -24,8 +25,8 @@ class Animal(ABC):
 
 
 class Terrestre(Animal):
-    def __init__(self,peso,nombre,energia,identificador,*args,**kwargs):
-        super().__init__(peso,nombre,energia,identificador)
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args, **kwargs)
         self.cantidad_patas=cantidad_patas
 
     def energia_gastada_por_desplazamiento(self):
@@ -40,8 +41,8 @@ class Terrestre(Animal):
 
 
 class Acuatico(Animal):
-    def __init__(self,peso,nombre,energia,identificador):
-        super().__init__(peso,nombre,energia,identificador)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def energia_gastada_por_desplazamiento(self):
         peso=self.peso
@@ -53,10 +54,8 @@ class Acuatico(Animal):
         return nadar
 
 class Perro(Terrestre):
-    def __init__(self,cantidad_patas,*args,**kwargs):
-        super().__init__()
-
-    def __init__(self,raza,*args,**kwargs):
+    def __init__(*args,**kwargs):
+        super().__init__(self, *args, **kwargs)
         self.raza=raza
     
     def ladrar(self):
@@ -64,9 +63,8 @@ class Perro(Terrestre):
         return guau
 
 class Pez(Acuatico):
-    def __init__(self,peso,nombre,energia,identificador):
-
-    def __init__(self,color,*args,**kwargs):
+    def __init__(self,*args, **kwargs):
+        super().__init__(self, *args, **kwargs)
         self.color=color
 
     def nadar(self):
@@ -75,8 +73,9 @@ class Pez(Acuatico):
     
 
 class Ornitorrinco(Terrestre,Acuatico):
-    def __init__(self,peso,nombre,energia,identificador,*args,**kwargs,cantidad_patas):
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(self, *args, **kwargs)
+        
     def desplazarse(self):
         peso=self.peso
         energia_requerida = ((peso*2)+(peso*5))//2
