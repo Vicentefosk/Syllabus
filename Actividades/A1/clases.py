@@ -5,35 +5,31 @@ from secrets import choice
 
 class Animal(ABC):
 
-    def __init__(self,peso,nombre,energia,identificador):
+    def __init__(self, peso, nombre, *args,**kwargs):
         self.peso = peso
-        self.nombre=nombre
-        self.__energia=100
-        self.identificador=identificador
-    
+        self.nombre = nombre
+        self.__energia = 100
+        self.__identificador = 0
+
     @abstractmethod
     def desplazarse(self):
-        pass
-    
+        pass   
     @property
-    def energia(self,energia):
-        if self.energia >= 0:
-            return self.energia
-        
+    def energia(self, __energia):       
+        if self.__energia >= 0:
+            return self.energia       
         else:
             return None
-
-
 class Terrestre(Animal):
-    def __init__(self,*args,**kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.cantidad_patas=cantidad_patas
+        self.cantidad_patas = 4
 
+    @property
     def energia_gastada_por_desplazamiento(self):
-        peso = self.peso
-        energia_requerida = (peso*5)
+        energia_requerida = (self.peso*5)
         return energia_requerida
-    
+    @property
     def desplazarse(self):
         caminar=print("caminando...")
         self.energia -= Terrestre.energia_gastada_por_desplazamiento
@@ -41,44 +37,30 @@ class Terrestre(Animal):
 
 
 class Acuatico(Animal):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
+    @property
     def energia_gastada_por_desplazamiento(self):
-        peso=self.peso
-        energia_requerida= (peso*2)
+        energia_requerida= (self.peso*2)
         return energia_requerida
+    @property
     def desplazarse(self):
         nadar = print("nadando...")
-        self.energia -= Acuatico.energia_gastada_por_desplazamiento
+        self.__energia -= Acuatico.energia_gastada_por_desplazamiento
         return nadar
 
 class Perro(Terrestre):
-    def __init__(*args,**kwargs):
-        super().__init__(self, *args, **kwargs)
-        self.raza=raza
-    
     def ladrar(self):
         guau=print("guau guau")
         return guau
 
 class Pez(Acuatico):
-    def __init__(self,*args, **kwargs):
-        super().__init__(self, *args, **kwargs)
-        self.color=color
-
     def nadar(self):
         nadar=print("moviendo aleta")
         return nadar
     
 
 class Ornitorrinco(Terrestre,Acuatico):
-    def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
-        
     def desplazarse(self):
-        peso=self.peso
-        energia_requerida = ((peso*2)+(peso*5))//2
+        energia_requerida = ((self.peso*2)+(self.peso*5))//2
         return energia_requerida
 
 
